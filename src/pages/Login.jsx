@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './Login.css';
 import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../context/AuthContext.jsx';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.jpg';
 
 function Login() {
     const navigate = useNavigate();
