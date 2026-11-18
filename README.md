@@ -1,13 +1,9 @@
 # WeltWagen
 
-```{=html}
-<p align="center">
-```
-`<strong>`{=html}Importálj okosabban. Láss mindent egy
-helyen.`</strong>`{=html}
-```{=html}
-</p>
-```
+
+Importálj okosabban. Láss mindent egy
+helyen.
+
 A **WeltWagen** egy digitális autóaukciós és logisztikai platform
 koncepciója, amely egyetlen felületen gyűjti össze a különböző országok
 aukciós és hirdetési oldalain elérhető járműajánlatokat. A cél, hogy a
@@ -16,8 +12,8 @@ import várható teljes költségét, a licit állapotát és a szállítás
 folyamatát is.
 
 > **Projekt:** vizsgaremek\
-> **Készítő:** Földi Roland\
-> **Dokumentumverzió:** 1.0\
+> **Készítő:** Földi Roland - Bakos Dominik\
+> **Dokumentumverzió:** 1.2\
 > **Dátum:** 2026. november 13.
 
 ------------------------------------------------------------------------
@@ -406,14 +402,14 @@ Tervezett WebSocket-események:
 -   Platformon belüli élő licitálás.
 -   Alapvető adminisztrációs funkciók.
 
-### 2. fázis -- Bővítés (3--6 hónap)
+### 2. fázis -- Bővítés 
 
 -   Közvetlen licitálás partner aukcióházakon keresztül.
 -   Teljes fizetési modul.
 -   Logisztikai követés fuvarozói integrációval.
 -   Kereskedői fiók és API.
 
-### 3. fázis -- Skálázás (6--12 hónap)
+### 3. fázis -- Skálázás
 
 -   Mesterséges intelligencia alapú ajánlások.
 -   Automatikus kárfelmérés képek alapján.
