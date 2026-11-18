@@ -1,7 +1,134 @@
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+/* Login.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  margin: 0;
+}
+
+/* A React fő tárolóját állítjuk be középre igazításra */
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Maga a bejelentkezési kártya */
+.login-container {
+  background-color: #ffffff;
+  padding: 45px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 600px; /* Fix 600px szélesség */
+  max-width: 100%; /* Mobilon ne lógjon ki */
+  text-align: center;
+}
+
+/* Logó beállításai (ha hozzáadod) */
+.login-container img {
+  display: block;
+  margin: 0 auto 15px auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Főcím (WeltWagen) */
+.login-container h1 {
+  font-size: 32px;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+/* Alcím (Bejelentkezés) */
+.login-container h2 {
+  font-size: 20px;
+  color: #666666;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* Az űrlap elemeinek elrendezése */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Beviteli mezők */
+.login-container input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Beviteli mező kijelölésekor (fókusz) */
+.login-container input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
+}
+
+/* Hibaüzenet stílusa */
+.error-message {
+  color: #d93025;
+  background-color: #fce8e6;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* Bejelentkezés gomb */
+.login-container button {
+  width: 100%;
+  padding: 14px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 8px;
+}
+
+.login-container button:hover:not(:disabled) {
+  background-color: #004494;
+}
+
+/* Letiltott gomb (betöltés alatt) */
+.login-container button:disabled {
+  background-color: #99bce0;
+  cursor: not-allowed;
+}
+
+/* Alsó szöveg és a Regisztráció link */
+.login-container > p {
+  margin-top: 25px;
+  font-size: 15px;
+  color: #555555;
+}
+
+.login-container a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
 }

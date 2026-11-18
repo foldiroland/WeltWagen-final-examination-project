@@ -1,50 +1,104 @@
-import React, { useState } from 'react'
-import './Login.css'
-import { useNavigate } from 'react-router';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+import { useState } from 'react';
+import './Login.css';
+import { useNavigate, Link } from 'react-router';
+import { useAuth } from '../context/AuthContext.jsx';
+import logo from '../assets/logo.png';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-  
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
+function Login() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    // Űrlapmezők kezelése
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
         });
-      const data = await response.json();
+    };
 
-      if (!response.ok) {
-        setError(data.message);
-        return;
-      }
+    // Bejelentkezés
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-      localStorage.setItem('user', JSON.stringify(data.user));
-      navigate('/home');
+        setError('');
+        setLoading(true);
 
-    } catch (error) { 
-      setError('Nem sikerült csatlakozni a szerverhez.');
-    }
-  } 
+        try {
+            const response = await fetch(
+                'http://localhost:5000/api/auth/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                }
+            );
 
-  return (
-    <div>
-      <h1>login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder='nev'/>
-        <input type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder='jelszo' onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Bejelentkezes</button>
-      </form>
-    </div>
-  )
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Sikertelen bejelentkezés!');
+            }
+
+            // Token és felhasználói adatok mentése
+            login(data.token, data.user);
+
+            navigate('/');
+
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <img src={logo} alt="Logo" width="200px" />
+            <h1>WeltWagen</h1>
+            <h2>Bejelentkezés</h2>
+
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="E-mail-cím"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Jelszó"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
+
+                {error && <p className="error-message">{error}</p>}
+
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Bejelentkezés...' : 'Bejelentkezés'}
+                </button>
+            </form>
+
+            <p>
+                Még nincs fiókod? <Link to="/register">Regisztráció</Link>
+            </p>
+        </div>
+    );
 }
 
-export default Login
+export default Login;
